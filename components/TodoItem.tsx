@@ -30,40 +30,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, deleteTodo }) => 
         />
       </div>
       <div className="flex-grow relative">
-        <p className={`font-handwritten text-2xl text-[var(--color-text-base)] transition-colors ${todo.completed ? 'text-[var(--color-text-muted)]' : ''}`}>
+        <p className={`font-handwritten text-2xl text-[var(--color-text-base)] transition-all ${todo.completed ? 'text-[var(--color-text-muted)] line-through' : ''}`}>
           {todo.text}
         </p>
-        {todo.completed && (
-           <svg
-             className="absolute top-1/2 left-0 w-full h-full text-slate-600"
-             viewBox="0 0 200 20"
-             preserveAspectRatio="none"
-             aria-hidden="true"
-           >
-             <path
-               d="M0.5 11.3917C66.6667 8.05833 133.333 8.05833 200 11.3917"
-               stroke="currentColor"
-               strokeWidth="2"
-               fill="none"
-               strokeLinecap="round"
-               pathLength="1"
-               strokeDasharray="1"
-               strokeDashoffset="0"
-               style={{ animation: 'strike 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards' }}
-             />
-             <style>{`
-               @keyframes strike {
-                 from { stroke-dashoffset: 1; }
-                 to { stroke-dashoffset: 0; }
-               }
-             `}</style>
-           </svg>
-        )}
-        {todo.dueDate && (
-           <p className={`text-xs mt-1 font-semibold transition-colors ${todo.completed ? 'text-gray-400' : 'text-[var(--color-accent-red)]'}`}>
-             Due: {new Date(`${todo.dueDate}T00:00:00`).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
-           </p>
-        )}
       </div>
       <div className="ml-4 pl-2 flex-shrink-0">
          <button 

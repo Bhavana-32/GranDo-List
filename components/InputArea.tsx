@@ -1,4 +1,5 @@
 
+
 import React, { useState, useCallback, useRef } from 'react';
 import { InputMethod, Todo } from '../types';
 import { useSpeechToText } from '../hooks/useSpeechToText';
@@ -82,7 +83,8 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
     }
   }
   
-  const tabs: { id: InputMethod; icon: JSX.Element; label: string }[] = [
+  // Fix: Use React.ReactElement instead of JSX.Element to resolve namespace issue.
+  const tabs: { id: InputMethod; icon: React.ReactElement; label: string }[] = [
     { id: 'text', icon: <TextIcon />, label: 'Text' },
     { id: 'voice', icon: <MicIcon />, label: 'Voice' },
     { id: 'image', icon: <UploadIcon />, label: 'Upload' },
