@@ -53,7 +53,7 @@ const App: React.FC = () => {
         <div className="h-8 bg-slate-800 shadow-inner"></div>
         <div className="bg-[var(--color-surface)]">
             <Header />
-            <InputArea setTodos={setTodos} setGrandmaMessage={setGrandmaMessage} />
+            <InputArea todos={todos} setTodos={setTodos} setGrandmaMessage={setGrandmaMessage} />
             <GrandmaWisdom key={grandmaMessage} message={grandmaMessage} />
             <TodoList todos={sortedTodos} setTodos={setTodos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
         </div>

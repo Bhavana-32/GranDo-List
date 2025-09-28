@@ -8,11 +8,12 @@ import { TextIcon, MicIcon, UploadIcon, SendIcon } from './Icons';
 import Loader from './Loader';
 
 interface InputAreaProps {
+  todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   setGrandmaMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) => {
+const InputArea: React.FC<InputAreaProps> = ({ todos, setTodos, setGrandmaMessage }) => {
   const [activeInput, setActiveInput] = useState<InputMethod>('text');
   const [textPrompt, setTextPrompt] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -57,9 +58,18 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
       }
       
       if (newTodos.length > 0) {
-        setTodos(prev => [...prev, ...newTodos]);
-        const wisdom = await getGrandmaWisdom(prompt);
-        setGrandmaMessage(wisdom);
+        const existingTexts = new Set(todos.map(t => t.text.trim().toLowerCase()));
+        const uniqueNewTodos = newTodos.filter(
+          newTodo => !existingTexts.has(newTodo.text.trim().toLowerCase())
+        );
+
+        if (uniqueNewTodos.length > 0) {
+            setTodos(prev => [...prev, ...uniqueNewTodos]);
+            const wisdom = await getGrandmaWisdom(prompt);
+            setGrandmaMessage(wisdom);
+        } else {
+            setGrandmaMessage("Looks like you've already got that on your list, sweetie. Are you trying to pull a fast one on your old grandma?");
+        }
       } else if (prompt.trim()) {
          setGrandmaMessage("I looked, and I looked, but I couldn't make heads or tails of that. Try again, dear.");
       }
@@ -72,7 +82,7 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
         setImageFile(null);
         setImagePreview(null);
     }
-  }, [activeInput, textPrompt, transcript, imageFile, imagePreview, setTodos, setGrandmaMessage]);
+  }, [activeInput, textPrompt, transcript, imageFile, imagePreview, todos, setTodos, setGrandmaMessage]);
 
   const handleTabClick = (method: InputMethod) => {
     setActiveInput(method);
