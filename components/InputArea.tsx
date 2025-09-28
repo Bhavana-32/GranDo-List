@@ -90,9 +90,9 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
 
   const getPlaceholder = () => {
     if (activeInput === 'voice') {
-      if (isListening) return 'Listening...';
+      if (isListening) return 'Go on, I\'m listening...';
       if (transcript) return '';
-      return "Click 'Voice' to start dictating...";
+      return "Click 'Voice' again to start dictating...";
     }
     if (activeInput === 'image') {
       if (imageFile) return `Ready to process ${imageFile.name}`;
@@ -104,17 +104,17 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
   const isSubmitDisabled = isLoading || (activeInput === 'text' && !textPrompt.trim()) || (activeInput === 'voice' && !transcript.trim()) || (activeInput === 'image' && !imageFile);
 
   return (
-    <div className="p-8">
-      <div className="bg-white p-4 rounded-xl shadow-md border border-gray-200">
-        <div className="flex items-center gap-2">
+    <div className="px-8 pt-4 pb-8">
+      <div className="bg-[#f4e9d8] p-4 rounded-lg border border-[#dcd3c4] shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)]">
+        <div className="flex items-center border-b border-[#dcd3c4] pb-3 mb-4 gap-4">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => handleTabClick(tab.id)}
               disabled={isLoading}
-              className={`flex items-center gap-2 py-2 px-4 rounded-lg transition-colors duration-200 font-semibold text-sm disabled:opacity-50 ${
-                activeInput === tab.id ? 'bg-violet-100 text-violet-800' : 'text-gray-600 hover:bg-gray-100'
-              } ${isListening && tab.id === 'voice' ? 'bg-red-100 text-red-700 animate-pulse' : ''}`}
+              className={`flex items-center gap-2 py-1 px-2 transition-all duration-200 font-semibold text-base disabled:opacity-50 border-b-4 ${
+                activeInput === tab.id ? 'border-[var(--color-primary)] text-[var(--color-text-base)]' : 'border-transparent text-[var(--color-text-muted)] hover:text-[var(--color-text-base)]'
+              } ${isListening && tab.id === 'voice' ? 'text-[var(--color-accent-red)] animate-pulse border-[var(--color-accent-red)]' : ''}`}
             >
               {tab.icon}
               <span>{tab.label}</span>
@@ -122,14 +122,12 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
           ))}
         </div>
 
-        <hr className="my-4" />
-        
         {hasRecognitionSupport === false && activeInput === 'voice' &&
-            <p className="text-red-500 text-sm mb-2 -mt-2">Sorry, your browser doesn't support voice recognition.</p>
+            <p className="text-red-500 text-sm mb-2">Sorry, your browser doesn't support voice recognition.</p>
         }
 
         {imagePreview && activeInput === 'image' && (
-          <div className="mb-4 p-2 border border-dashed border-gray-300 rounded-lg bg-gray-50">
+          <div className="mb-4 p-2 border border-dashed border-[#dcd3c4] rounded-lg bg-[#efe8da]">
               <img src={imagePreview} alt="Preview" className="max-h-32 w-auto mx-auto rounded-md" />
           </div>
         )}
@@ -139,7 +137,7 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
             value={activeInput === 'text' ? textPrompt : (activeInput === 'voice' ? transcript : '')}
             onChange={(e) => activeInput === 'text' && setTextPrompt(e.target.value)}
             placeholder={getPlaceholder()}
-            className="w-full p-3 pr-16 text-base text-gray-800 bg-gray-50 rounded-lg border border-gray-300 focus:ring-2 focus:ring-violet-400 focus:border-violet-400 transition resize-none placeholder:text-gray-500"
+            className="w-full p-3 pr-16 text-2xl font-handwritten text-[var(--color-text-base)] bg-transparent rounded-lg border-none focus:ring-0 transition resize-none placeholder:text-[var(--color-text-muted)] placeholder:font-sans placeholder:text-base"
             rows={2}
             disabled={isLoading || activeInput !== 'text'}
             onKeyDown={(e) => {
@@ -152,7 +150,7 @@ const InputArea: React.FC<InputAreaProps> = ({ setTodos, setGrandmaMessage }) =>
           <button
             onClick={handleSubmit}
             disabled={isSubmitDisabled}
-            className="absolute right-3 top-1/2 -translate-y-1/2 bg-slate-600 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-slate-700 disabled:bg-gray-400 disabled:scale-100 disabled:cursor-not-allowed transition-all transform hover:scale-105 active:scale-95"
+            className="absolute right-3 top-1/2 -translate-y-1/2 bg-[var(--color-primary)] text-[var(--color-surface)] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[var(--color-primary-dark)] disabled:bg-gray-400 disabled:scale-100 disabled:cursor-not-allowed transition-all transform hover:scale-105 active:scale-95"
             aria-label="Submit"
           >
             <SendIcon />
