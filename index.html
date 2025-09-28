@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nagging Grandma's To-Do</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Kalam:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --color-background: #6f5f53; /* Wood texture background */
+        --color-surface: #fffbe6; /* Pale Yellow Paper */
+        --color-primary: #3a5a7e; /* Muted Ink Blue */
+        --color-primary-dark: #2c4460;
+        --color-accent-red: #d94c4c; /* Margin Red */
+        --color-text-base: #1e1e1e; /* Dark Ink */
+        --color-text-muted: #575757;
+        --color-border: #e0d5c1;
+        --line-height-paper: 2.75rem; /* 44px */
+      }
+      body {
+        background-color: var(--color-background);
+        font-family: 'Inter', sans-serif;
+        color: var(--color-text-base);
+        background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill-rule="evenodd"><g fill="%235a4c41" fill-opacity="0.4"><path opacity=".5" d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm10-10v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm-10 10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 20v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm10 80v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm-10-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 30v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm0-10v-9h-9v9h9zm10-20v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm10 0v-9h-9v9h9zm-10 10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9z" /><path d="M6 5V0h1v5h94V0h1v5h-6v95h6v1h-6v-5H6v5H5v-5H0V5h6z" /></g></g></svg>');
+      }
+      h1, h2, h3 {
+        font-family: 'Lora', serif;
+      }
+      .font-handwritten {
+        font-family: 'Kalam', cursive;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fadeInUp {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+
+      @keyframes fadeOutAndSlide {
+        to {
+          opacity: 0;
+          transform: translateX(30px);
+          height: 0;
+          padding-top: 0;
+          padding-bottom: 0;
+          margin-bottom: 0;
+          border-width: 0;
+        }
+      }
+      .animate-fadeOutAndSlide {
+        animation: fadeOutAndSlide 0.4s ease-out forwards;
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .animate-slideInLeft {
+        animation: slideInLeft 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

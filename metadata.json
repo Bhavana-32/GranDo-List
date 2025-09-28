@@ -1,0 +1,8 @@
+{
+  "name": "Nagging Grandma's To-Do List",
+  "description": "An over-engineered, aesthetically pleasing to-do list app where a nagging AI grandma helps you summarize your rants, voice notes, and event posters into an actionable, rearrangeable list.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

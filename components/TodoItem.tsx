@@ -1,0 +1,81 @@
+
+import React from 'react';
+import { Todo } from '../types';
+import { DragHandleIcon, TrashIcon } from './Icons';
+
+interface TodoItemProps {
+  todo: Todo;
+  toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
+}
+
+const TodoItem: React.FC<TodoItemProps> = ({ todo, toggleTodo, deleteTodo }) => {
+  const containerClasses = `
+    flex items-center w-full min-h-[var(--line-height-paper)]
+    ${todo.isDeleting ? 'animate-fadeOutAndSlide' : 'animate-fadeInUp'}
+  `;
+
+  return (
+    <div className={containerClasses}>
+      <div className="cursor-grab group -ml-1">
+        <DragHandleIcon />
+      </div>
+      <div className="flex-shrink-0 mx-2">
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={() => toggleTodo(todo.id)}
+          className="appearance-none h-6 w-6 border-2 border-gray-400 rounded-sm bg-transparent checked:bg-[var(--color-primary)] checked:border-transparent focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)] cursor-pointer relative"
+          style={{ backgroundImage: todo.completed ? `url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e")` : 'none' }}
+        />
+      </div>
+      <div className="flex-grow relative">
+        <p className={`font-handwritten text-2xl text-[var(--color-text-base)] transition-colors ${todo.completed ? 'text-[var(--color-text-muted)]' : ''}`}>
+          {todo.text}
+        </p>
+        {todo.completed && (
+           <svg
+             className="absolute top-1/2 left-0 w-full h-full text-slate-600"
+             viewBox="0 0 200 20"
+             preserveAspectRatio="none"
+             aria-hidden="true"
+           >
+             <path
+               d="M0.5 11.3917C66.6667 8.05833 133.333 8.05833 200 11.3917"
+               stroke="currentColor"
+               strokeWidth="2"
+               fill="none"
+               strokeLinecap="round"
+               pathLength="1"
+               strokeDasharray="1"
+               strokeDashoffset="0"
+               style={{ animation: 'strike 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards' }}
+             />
+             <style>{`
+               @keyframes strike {
+                 from { stroke-dashoffset: 1; }
+                 to { stroke-dashoffset: 0; }
+               }
+             `}</style>
+           </svg>
+        )}
+        {todo.dueDate && (
+           <p className={`text-xs mt-1 font-semibold transition-colors ${todo.completed ? 'text-gray-400' : 'text-[var(--color-accent-red)]'}`}>
+             Due: {new Date(`${todo.dueDate}T00:00:00`).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}
+           </p>
+        )}
+      </div>
+      <div className="ml-4 pl-2 flex-shrink-0">
+         <button 
+           onClick={() => deleteTodo(todo.id)}
+           className="text-gray-400 hover:text-[var(--color-accent-red)] transition-colors duration-200"
+           aria-label="Delete todo"
+          >
+            <TrashIcon />
+         </button>
+      </div>
+    </div>
+  );
+};
+
+export default TodoItem;
